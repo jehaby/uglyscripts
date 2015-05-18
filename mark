@@ -1,0 +1,23 @@
+#!/bin/bash
+# Simple ugly script for making html from markdown documents
+
+filename=${1:-README}
+
+if [[ "$(echo $filename | tail -c 4)" =~ (.md|.MD) ]]; then  
+    filename=${filename::-3}
+fi
+
+title=${2:-$filename}
+
+cat << EOF
+<html>
+<head>
+<meta charset='utf-8'/>
+<title>$title</title>
+</head>
+<body>
+$(markdown ${filename}.md) 
+</body>
+</html>
+EOF
+
